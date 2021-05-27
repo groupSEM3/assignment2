@@ -1,0 +1,14 @@
+.class1{
+    font-size: 25px;
+    display:inline;
+    padding: 0.20cm;
+}
+div.relative {
+    position: relative;
+    left: 50px;
+    
+  }
+
+.mid{
+    text-align: center;
+}
