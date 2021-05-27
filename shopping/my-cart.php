@@ -27,6 +27,14 @@ if(!empty($_SESSION['cart'])){
 			echo "<script>alert('Your Cart has been Updated');</script>";
 	}
 }
+if (isset($_POST['sub'])) {
+
+	mysqli_query($con,"update orders set 	paymentMethod='".$_POST['paymethod']."' where userId='".$_SESSION['id']."' and paymentMethod is null ");
+	unset($_SESSION['cart']);
+	header('location:order-history.php');
+
+}
+
 // code for insert product in order table
 
 
@@ -70,6 +78,7 @@ header('location:payment-method.php');
 	    <meta name="robots" content="all">
 
 	    <title>My Cart</title>
+		<link rel="stylesheet" href="assets/css/update.css"> <!-- Update Css -->
 	    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	    <link rel="stylesheet" href="assets/css/main.css">
 	    <link rel="stylesheet" href="assets/css/green.css">
@@ -129,6 +138,50 @@ header('location:payment-method.php');
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
 </div><!-- /.breadcrumb -->
+<!-- Payment Option Start -->
+
+<div class="body-content outer-top-bd" >
+	<div class="container">
+		<div class="checkout-box faq-page inner-bottom-sm">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Choose Payment Method</h2>
+					<div class="panel-group checkout-steps" id="accordion">
+						<!-- checkout-step-01  -->
+<div class="panel panel-default checkout-step-01" >
+
+	<!-- panel-heading -->
+		<div class="panel-heading">
+    	<h4 class="unicase-checkout-title">
+	        <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseOne">
+	         Select your Payment Method
+	        </a>
+	     </h4>
+    </div>
+    <!-- panel-heading -->
+
+	<div id="collapseOne" class="panel-collapse collapse in">
+
+		<!-- panel-body  -->
+	    <div class="panel-body">
+	    <form name="payment" method="post">
+		
+	    <input type="radio" name="paymethod" value="COD" checked="checked" class="class1"><p class="class1">COD</p>
+		<img src="assets/images/cod.png"  width="100" height="50">
+	     <input type="radio" name="paymethod" value="Internet Banking"><p class="class1">Internet Banking</p>
+		 <img src="assets/images/download.png"  width="100" height="50">
+	     <input type="radio" name="paymethod" value="Debit / Credit card"> <p class="class1">Credit/Debit Card</p> 
+		 <img src="assets/images/images.png"  width="100" height="50"><br /><br />
+	     
+
+	    </form>		
+		</div>
+		<!-- panel-body  -->
+
+	</div><!-- row -->
+	
+	
+</div> <!-- Payment Option End -->
 
 <div class="body-content outer-top-xs">
 	<div class="container">
@@ -317,7 +370,7 @@ while ($rt=mysqli_fetch_array($qry)) {
 				<tr>
 					<td>
 						<div class="cart-checkout-btn pull-right">
-							<button type="submit" name="ordersubmit" class="btn btn-primary">PROCCED TO CHEKOUT</button>
+							 <input type="submit" value="submit" name="sub" class="btn btn-primary">
 						
 						</div>
 					</td>
