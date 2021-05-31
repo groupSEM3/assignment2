@@ -32,7 +32,7 @@ if (isset($_POST['sub'])) {
 	mysqli_query($con,"update orders set 	paymentMethod='".$_POST['paymethod']."' where userId='".$_SESSION['id']."' and paymentMethod is null ");
 	unset($_SESSION['cart']);
 	header('location:order-history.php');
-
+	
 }
 
 // code for insert product in order table
@@ -118,7 +118,11 @@ header('location:payment-method.php');
 
 	</head>
     <body class="cnt-home">
-	
+	<script> //THANK FOR PURCHASE ALERT
+	function myFunction() {
+  	alert("THANK FOR YOUR PURCHASE");
+	}
+	</script>
 		
 	
 		<!-- ============================================== HEADER ============================================== -->
@@ -370,7 +374,7 @@ while ($rt=mysqli_fetch_array($qry)) {
 				<tr>
 					<td>
 						<div class="cart-checkout-btn pull-right">
-							 <input type="submit" value="submit" name="sub" class="btn btn-primary">
+							 <input type="submit" value="submit" name="sub" class="btn btn-primary" onclick="myFunction()">
 						
 						</div>
 					</td>
